@@ -14,10 +14,10 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  background-image: url("background.png");
+  /* background-image: url("background.png"); */
   font-family: var(--font-default);
   font-size: 18px;
-  max-width: 1300px;
+  width: 95%;
   margin: 0 auto;
 }
 
@@ -56,6 +56,8 @@ img {
   background-color: #ff0000;
   color: #ffffff;
   border-radius: 15px;
+  text-decoration: underline;
+  text-underline-position: under;
 }
 
 .topnav a.active {
