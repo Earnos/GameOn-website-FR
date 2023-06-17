@@ -75,6 +75,7 @@ img {
   .topnav a.icon {
     float: right;
     display: block;
+    color: #ff0000;
   }
 }
 
@@ -99,7 +100,6 @@ img {
   .topnav a.icon {
     float: right;
     display: block;
-    margin-top: -15px;
   }
 } 
 
@@ -228,12 +228,18 @@ input {
 .formData[data-error-visible="true"] .text-control {
   border: 2px solid #e54858;
 }
-/* 
+ 
 input[data-error]::after {
     content: attr(data-error);
     font-size: 0.4em;
     color: red;
-} */
+} 
+
+#firstNameErr {
+  color:#ff0000;
+  font-size: 0.8rem;
+}
+
 .checkbox-label,
 .checkbox2-label {
   position: relative;
