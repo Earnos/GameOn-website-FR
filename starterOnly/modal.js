@@ -52,10 +52,15 @@ const isValidEmail = (value) => {
   return re.test(value);
 };
 
-const isValidBirthDate = (value) => {
-  const re = /^[a-zA-Z][a-zA-Z\s-]+[a-zA-Z]$/;
-  return re.test(value);
-};
+// const isValidBirthDate = (value) => {
+//   const re = /^[a-zA-Z][a-zA-Z\s-]+[a-zA-Z]$/;
+//   return re.test(value);
+// };
+
+const isValidQty = (value) => {
+const re = /^(\d{1,2})(\.\d\d)?$/;
+   return re.test(value)
+ }
 
 
 
@@ -63,51 +68,47 @@ const isValidBirthDate = (value) => {
 
 firstName.addEventListener("input", () => {
   if (isValidText(firstName.value)) {
-    document.getElementById("firstNameErr").innerText = "";
+    formData[0].dataset.errorVisible = "false";
   } else {
-    //document.querySelector(".formData").hasAttribute("data-error").innerText = "test";
-    firstName.classList.toggle("true");
-    //document.getElementsByTagName(input).getAttribute("data-error").innerText = "Saisie incorrecte"
-    document.getElementById("firstNameErr").innerText =
-    "Saisie du prénom incorrecte";
-    //const first = document.getElementById("firstNameErr");
-    //first.getAttribute("data-error-visible");
-    
+    //formData.dataset.errorVisible= "true";
+    formData[0].dataset.error = "Saisie du prénom incorrecte";
+    formData[0].dataset.errorVisible = "true";  
   }
 });
 
 lastName.addEventListener("input", () => {
   if (isValidText(lastName.value)) {
-    document.getElementById("lastNameErrorMsg").innerText = "";
+    formData[1].dataset.errorVisible = "false";
   } else {
-    document.getElementById("lastNameErrorMsg").innerText =
-      "Saisie du nom incorrecte";
+    formData[1].dataset.error = "Saisie du nom incorrecte";
+    formData[1].dataset.errorVisible = "true";
   }
 });
 
 mail.addEventListener("input", () => {
   if (isValidEmail(mail.value) || mail.value == "") {
-    document.getElementById("emailErrorMsg").innerText = "";
+    formData[2].dataset.errorVisible = "false";
   } else {
-    document.getElementById("emailErrorMsg").innerText = "Email incorrect";
+    formData[2].dataset.error = "Adresse mail invalide";
+    formData[2].dataset.errorVisible = "true";
   }
 });
 
-birthDate.addEventListener("input", () => {
-  if (isValidBirthDate(birthDate.value) || birthDate.value == "") {
-    document.getElementById("").innerText = "";
-  } else {
-    document.getElementById("").innerText =
-      "Date de naissance non valide";
-  }
-});
+// birthDate.addEventListener("input", () => {
+//   if (isValidBirthDate(birthDate.value) || birthDate.value == "") {
+//     formData[3].dataset.errorVisible = "false";
+//   } else {
+//     formData[3].dataset.error = "Date incorrecte";
+//     formData[3].dataset.errorVisible = "true";
+//   }
+// });
 
 quantity.addEventListener("input", () => {
-  if (isValidCity(quantity.value) || quantity.value == "") {
-    document.getElementById("").innerText = "";
+  if (isValidQty(quantity.value) || quantity.value == "" ) {
+    formData[4].dataset.errorVisible = "false";
   } else {
-    document.getElementById("").innerText =
-      "Veuillez saisir un nombre";
+    formData[4].dataset.error = "Entrer une valeur";
+    formData[4].dataset.errorVisible = "true";
   }
 });
 
@@ -125,9 +126,10 @@ const IscheckBoxIsOff = () =>  {
 
 
 // submit form & comfirm button
-const form = document.getElementsByName("reserve");
 
-form.addEventListener("submit", (e) => {
-  form.classList.remove("modal-body");
-  e.preventDefault();
-})
+// const form = document.getElementsByName("reserve");
+
+// form.addEventListener("submit", (e) => {
+//   // form.classList.remove("modal-body");
+//   e.preventDefault();
+// })
