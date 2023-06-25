@@ -13,13 +13,14 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const closeForm = document.querySelector(".close");
 
+
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
-}
+};
 
 // close form window
 closeForm.addEventListener('click', e => {
@@ -51,11 +52,6 @@ const isValidEmail = (value) => {
     /^([a-zA-Z0-9]+(([\.\-\_]?[a-zA-Z0-9]+)+)?)\@(([a-zA-Z0-9]+[\.\-\_])+[a-zA-Z]{2,4})$/;
   return re.test(value);
 };
-
-// const isValidBirthDate = (value) => {
-//   const re = /^[a-zA-Z][a-zA-Z\s-]+[a-zA-Z]$/;
-//   return re.test(value);
-// };
 
 const isValidQty = (value) => {
 const re = /^(\d{1,2})(\.\d\d)?$/;
@@ -94,42 +90,65 @@ mail.addEventListener("input", () => {
   }
 });
 
-// birthDate.addEventListener("input", () => {
-//   if (isValidBirthDate(birthDate.value) || birthDate.value == "") {
-//     formData[3].dataset.errorVisible = "false";
-//   } else {
-//     formData[3].dataset.error = "Date incorrecte";
-//     formData[3].dataset.errorVisible = "true";
-//   }
-// });
-
 quantity.addEventListener("input", () => {
   if (isValidQty(quantity.value) || quantity.value == "" ) {
     formData[4].dataset.errorVisible = "false";
   } else {
-    formData[4].dataset.error = "Entrer une valeur";
+    formData[4].dataset.error = "Entrer une valeur correcte";
     formData[4].dataset.errorVisible = "true";
   }
 });
 
-
-// checkBox confirmation on submit
-const checkInput = document.querySelector(".checkbox-input")
-const IscheckBoxIsOff = () =>  {
-    submitBtn = document.querySelector("btn-submit");
-  if (!checkInput.value) {
-    submitBtn.style.background = "grey";
-  } else {
-    return;
-  }
-}
-
-
 // submit form & comfirm button
 
-// const form = document.getElementsByName("reserve");
+ const form = document.getElementById('form');
+ const submitBtn = document.querySelector(".btn-submit");
+ const formBody = document.querySelector(".modal-body");
+ const checkboxRequired = document.getElementById("checkbox1");
+ const contentForm = document.querySelector(".content");
 
-// form.addEventListener("submit", (e) => {
-//   // form.classList.remove("modal-body");
-//   e.preventDefault();
-// })
+
+ form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    form.style.display = "none";
+    formBody.style.height = "700px";
+
+    // create p html tag for after submit confirmation window
+    p = document.createElement("p");
+    p.innerHTML = "Merci pour votre inscription";
+    formBody.append(p);
+
+    // close button after submit window
+    confirmCloseBtn = document.createElement("button");
+    confirmCloseBtn.classList.add("confirmSubmitClose");
+    confirmCloseBtn.type = "button";
+    confirmCloseBtn.innerHTML = "Fermer";
+    formBody.append(confirmCloseBtn);
+
+    // close after submit window 
+   const closeAfterSubmit = document.querySelector(".confirmSubmitClose");
+   closeAfterSubmit.addEventListener('click', e =>{
+    modalbg.style.display = "none";
+    // re-display the form for the next time
+    form.style.display = "block";
+   });
+ });
+
+function validate() {
+
+    // verify if the checkbox is checked
+    if(!checkboxRequired.checked) {
+        alert("veuillez accepter les conditions d'utilisation")
+    }
+    
+    // verification if all form value have inputs value
+    const formDataInput = document.querySelectorAll(".formData > input");
+
+     for (let i = 0; i < formDataInput[i].length; i++) {
+       if (!formDataInput[i].value) {
+         alert("Veuillez remplir tous les champs"); 
+        }
+      }
+      console.log(formDataInput[0].value);
+};

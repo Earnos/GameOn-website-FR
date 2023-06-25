@@ -190,6 +190,25 @@ main {
   margin: 15px auto;
 }
 
+.modal-body > p {
+  font-size: 30px;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  margin-top: 260px;
+}
+
+  .modal-body > button {  
+  background: #fe142f;
+  margin-top: 68%;
+  margin-left: 37%;
+  padding: 0.6em 2em;
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
 label {
   font-family: var(--font-default);
   font-size: 17px;
@@ -212,7 +231,7 @@ input {
 }
 .formData[data-error]::after {
   content: attr(data-error);
-  font-size: 0.4em;
+  font-size: 0.6em;
   color: #e54858;
   display: block;
   margin-top: 7px;
@@ -495,6 +514,7 @@ footer {
     background: #fff;
     color: #000;
     padding: 20px;
+    min-width: 350px;
   }
   .hero-content::after {
     content: unset;
@@ -503,7 +523,7 @@ footer {
     display: none;
   }
   .hero-headline {
-    font-size: 4.5rem;
+    font-size: 3rem;
     white-space: normal;
   }
   .hero-text {
