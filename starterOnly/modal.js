@@ -54,7 +54,7 @@ const isValidEmail = (value) => {
 };
 
 const isValidQty = (value) => {
-const re = /^(\d{1,2})(\.\d\d)?$/;
+const re = /^(\d{1,4})(\.\d\d)?$/;
    return re.test(value)
  }
 
@@ -66,7 +66,6 @@ firstName.addEventListener("input", () => {
   if (isValidText(firstName.value)) {
     formData[0].dataset.errorVisible = "false";
   } else {
-    //formData.dataset.errorVisible= "true";
     formData[0].dataset.error = "Saisie du prénom incorrecte";
     formData[0].dataset.errorVisible = "true";  
   }
@@ -107,48 +106,60 @@ quantity.addEventListener("input", () => {
  const checkboxRequired = document.getElementById("checkbox1");
  const contentForm = document.querySelector(".content");
 
+ 
 
- form.addEventListener("submit", (e) => {
-    e.preventDefault();
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      form.style.display = "none";
+      formBody.style.height = "750px";
+      
+      // create p html tag for after submit confirmation window
+      p = document.createElement("p");
+      p.innerHTML = "Merci pour votre inscription";
+      formBody.append(p);
+      
+      // creation button after submit window
+      confirmCloseBtn = document.createElement("button");
+      confirmCloseBtn.classList.add("confirmSubmitClose");
+      confirmCloseBtn.type = "button";
+      confirmCloseBtn.innerHTML = "Fermer";
+      formBody.append(confirmCloseBtn);
+      
+      // close event after submit window 
+      const closeAfterSubmit = document.querySelector(".confirmSubmitClose");
+      closeAfterSubmit.addEventListener('click', e =>{
+        modalbg.style.display = "none";
+        // re-display the form for the next time
+        form.style.display = "block";
+      })
+      return validate();
+    
+  }, false);
+   
+    
+// verification function if all input has value
+    const CheckValue = () => {
+     // const formDataInput = document.querySelectorAll(".formData > input");
+        const formDataInput = document.querySelectorAll(".text-control");
 
-    form.style.display = "none";
-    formBody.style.height = "700px";
-
-    // create p html tag for after submit confirmation window
-    p = document.createElement("p");
-    p.innerHTML = "Merci pour votre inscription";
-    formBody.append(p);
-
-    // close button after submit window
-    confirmCloseBtn = document.createElement("button");
-    confirmCloseBtn.classList.add("confirmSubmitClose");
-    confirmCloseBtn.type = "button";
-    confirmCloseBtn.innerHTML = "Fermer";
-    formBody.append(confirmCloseBtn);
-
-    // close after submit window 
-   const closeAfterSubmit = document.querySelector(".confirmSubmitClose");
-   closeAfterSubmit.addEventListener('click', e =>{
-    modalbg.style.display = "none";
-    // re-display the form for the next time
-    form.style.display = "block";
-   });
- });
+      for (let i = 0; i < formDataInput.length; i++) {
+        if (!formDataInput[i].value) {
+          alert("Veuillez remplir tous les champs"); 
+          return false;
+        }
+        // console.log(formDataInput[i].value);  
+      }
+    };   
+ 
 
 function validate() {
 
-    // verify if the checkbox is checked
-    if(!checkboxRequired.checked) {
-        alert("veuillez accepter les conditions d'utilisation")
-    }
-    
-    // verification if all form value have inputs value
-    const formDataInput = document.querySelectorAll(".formData > input");
+    CheckValue();
 
-     for (let i = 0; i < formDataInput[i].length; i++) {
-       if (!formDataInput[i].value) {
-         alert("Veuillez remplir tous les champs"); 
-        }
-      }
-      console.log(formDataInput[0].value);
+    // verify if the checkbox is checked
+    if (!checkboxRequired.checked) {
+        alert("veuillez accepter les conditions d'utilisation");
+        return false;
+      }  
+   
 };
