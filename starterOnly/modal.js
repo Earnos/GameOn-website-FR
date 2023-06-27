@@ -99,32 +99,29 @@ quantity.addEventListener("input", () => {
 });
 
 // submit form & comfirm button
-
  const form = document.getElementById('form');
  const submitBtn = document.querySelector(".btn-submit");
  const formBody = document.querySelector(".modal-body");
  const checkboxRequired = document.getElementById("checkbox1");
  const contentForm = document.querySelector(".content");
 
+// form submit event
+    form.addEventListener("submit", (e) => {e.preventDefault()}, false);
  
-
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
+// function of confirmation submit's windows  
+    const afterSubmitWindows = () => {
       form.style.display = "none";
       formBody.style.height = "750px";
-      
-      // create p html tag for after submit confirmation window
+      // create p html tag for submit confirmation window
       p = document.createElement("p");
       p.innerHTML = "Merci pour votre inscription";
       formBody.append(p);
-      
       // creation button after submit window
       confirmCloseBtn = document.createElement("button");
       confirmCloseBtn.classList.add("confirmSubmitClose");
       confirmCloseBtn.type = "button";
       confirmCloseBtn.innerHTML = "Fermer";
       formBody.append(confirmCloseBtn);
-      
       // close event after submit window 
       const closeAfterSubmit = document.querySelector(".confirmSubmitClose");
       closeAfterSubmit.addEventListener('click', e =>{
@@ -132,34 +129,42 @@ quantity.addEventListener("input", () => {
         // re-display the form for the next time
         form.style.display = "block";
       })
-      return validate();
-    
-  }, false);
-   
+    };
+
     
 // verification function if all input has value
-    const CheckValue = () => {
-     // const formDataInput = document.querySelectorAll(".formData > input");
+    const checkValues = () => {
+       //const formDataInput = document.querySelectorAll(".formData > input");
         const formDataInput = document.querySelectorAll(".text-control");
 
       for (let i = 0; i < formDataInput.length; i++) {
         if (!formDataInput[i].value) {
           alert("Veuillez remplir tous les champs"); 
           return false;
-        }
-        // console.log(formDataInput[i].value);  
+        } 
       }
+      
     };   
+
+// valid checkbox function
+
+    const checkBoxUserCondition = () => {
+    // verify if the checkbox is checked
+    if (!checkboxRequired.checked) {
+     alert("veuillez accepter les conditions d'utilisation");
+     return false;
+    } 
+  };
  
 
 function validate() {
+  
+    checkboxRequired.checked && checkValues ? afterSubmitWindows() : false;
 
-    CheckValue();
-
-    // verify if the checkbox is checked
-    if (!checkboxRequired.checked) {
-        alert("veuillez accepter les conditions d'utilisation");
-        return false;
-      }  
+    checkValues();
+    checkBoxUserCondition();
+     
+ };
+  
+  
    
-};
