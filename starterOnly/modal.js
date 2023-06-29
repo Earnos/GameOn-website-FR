@@ -28,7 +28,7 @@ closeForm.addEventListener('click', e => {
 });
 
 
- // RegEx Input selection
+ // RegEx Inputs selection
 const firstName = document.getElementById("first");
 const lastName = document.getElementById("last");
 const mail = document.getElementById("email");
@@ -60,7 +60,7 @@ const re = /^(\d{1,4})(\.\d\d)?$/;
 
 
 
-// form RegEx validation functions
+// RegEx validation functions
 
 firstName.addEventListener("input", () => {
   if (isValidText(firstName.value)) {
@@ -98,17 +98,17 @@ quantity.addEventListener("input", () => {
   }
 });
 
-// submit form & comfirm button
+// submit's form & comfirm button
  const form = document.getElementById('form');
  const submitBtn = document.querySelector(".btn-submit");
  const formBody = document.querySelector(".modal-body");
  const checkboxRequired = document.getElementById("checkbox1");
  const contentForm = document.querySelector(".content");
 
-// form submit event
+// form's submit event
     form.addEventListener("submit", (e) => {e.preventDefault()}, false);
  
-// function of confirmation submit's windows  
+// creation of confirmation submit's windows  
     const afterSubmitWindows = () => {
       form.style.display = "none";
       formBody.style.height = "750px";
@@ -132,39 +132,64 @@ quantity.addEventListener("input", () => {
     };
 
     
-// verification function if all input has value
+// verification if all input has a value
     const checkValues = () => {
-       //const formDataInput = document.querySelectorAll(".formData > input");
-        const formDataInput = document.querySelectorAll(".text-control");
+      //const formDataInput = document.querySelectorAll(".formData > input");
+      const formDataInput = document.querySelectorAll(".text-control");
 
       for (let i = 0; i < formDataInput.length; i++) {
         if (!formDataInput[i].value) {
           alert("Veuillez remplir tous les champs"); 
           return false;
         } 
-      }
-      
+      } 
+      return true;
     };   
 
-// valid checkbox function
-
+//  valid  if checkbox is checked
     const checkBoxUserCondition = () => {
-    // verify if the checkbox is checked
-    if (!checkboxRequired.checked) {
-     alert("veuillez accepter les conditions d'utilisation");
-     return false;
-    } 
+      // verify if the checkbox is checked
+      if (!checkboxRequired.checked) {
+      alert("veuillez accepter les conditions d'utilisation");
+      return false;
+      }
+    return true;
   };
+
  
+// valid if one checkbox'location is checked
+    const checkedLocation = () => {
+      const locationsCheckBox = document.getElementsByName("location");
 
-function validate() {
+      for (let i=0; i < locationsCheckBox.length; i++) {
+        if (locationsCheckBox[i].checked) {
+          return true
+        }
+      }
+      alert("Veuillez sélectionner une localité");
+      return false;    
+     }
+ 
+   
+// send submit if form is checked and has values
+    function validate() {    
+      // Verify all the conditions is ok for submit or display an error
+      checkBoxUserCondition() && checkValues() && checkedLocation() ? afterSubmitWindows() : false;     
+    };
+
+    submitBtn.addEventListener('click', (e) => {AfterSubmitClearForm()}); 
+
+// rest form after submit completed
+    const AfterSubmitClearForm = () => {
+        const frm = document.getElementsByName("reserve")[0];
+      console.log(frm);
+      frm.reset();
+      return false 
+    };
+
+
   
-    checkboxRequired.checked && checkValues ? afterSubmitWindows() : false;
 
-    checkValues();
-    checkBoxUserCondition();
-     
- };
   
   
    
