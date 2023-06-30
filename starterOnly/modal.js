@@ -177,7 +177,7 @@ quantity.addEventListener("input", () => {
       checkBoxUserCondition() && checkValues() && checkedLocation() ? afterSubmitWindows() : false;     
     };
     // clear form after submit completed
-     submitBtn.addEventListener('click', (e) => {AfterSubmitClearForm()}); 
+     //submitBtn.addEventListener('click', (e) => {AfterSubmitClearForm()}); 
 
 // rest form after submit completed
     const AfterSubmitClearForm = () => {
