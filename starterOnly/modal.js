@@ -16,6 +16,16 @@ const closeForm = document.querySelector(".close");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+// clear form after registered and launch modal again
+modalBtn.forEach((btn) => btn.addEventListener("click", () => {
+  const AfterSubmitClearForm = () => {
+    const frm = document.getElementsByName("reserve")[0];
+  console.log(frm);
+  frm.reset();
+  return false 
+}
+AfterSubmitClearForm()
+}));
 
 // launch modal form
 function launchModal() {
@@ -176,20 +186,3 @@ quantity.addEventListener("input", () => {
       // Verify all the conditions is ok for submit or display an error
       checkBoxUserCondition() && checkValues() && checkedLocation() ? afterSubmitWindows() : false;     
     };
-    // clear form after submit completed
-     //submitBtn.addEventListener('click', (e) => {AfterSubmitClearForm()}); 
-
-// rest form after submit completed
-    const AfterSubmitClearForm = () => {
-        const frm = document.getElementsByName("reserve")[0];
-      console.log(frm);
-      frm.reset();
-      return false 
-    };
-
-
-  
-
-  
-  
-   
