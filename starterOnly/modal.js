@@ -29,6 +29,9 @@ modalBtn.forEach(btn =>
 
 // launch modal form
 function launchModal() {
+  // remove precede form's error 
+  isRemoveError();
+  // display form
   modalbg.style.display = "block";
 }
 
@@ -67,7 +70,6 @@ const isValidQty = value => {
 };
 
 // RegEx validation functions
-
 firstName.addEventListener("input", () => {
   if (isValidText(firstName.value)) {
     formData[0].dataset.errorVisible = "false";
@@ -123,7 +125,6 @@ form.addEventListener(
 // creation of confirmation submit's windows
 const afterSubmitWindows = () => {
   form.style.display = "none";
-  //formBody.style.height = "750px";
   // create p html tag for submit confirmation window
   p = document.createElement("p");
   p.classList.add("confirmText");
@@ -150,15 +151,14 @@ const afterSubmitWindows = () => {
 
 // verification if all input has a value
 const checkValues = () => {
-  //const formDataInput = document.querySelectorAll(".formData > input");
   const formDataInput = document.querySelectorAll(".text-control");
-  //!isValidAddress && !isValidEmail && !isValidQty
 
   for (let i = 0; i < formDataInput.length; i++) {
     if ((!formDataInput[i].value)) {
       alert("Veuillez remplir tous les champs");
       return false;
     }  
+    // condition for check regex on values for submit
   } if ((isValidText(firstName.value) && isValidText(lastName.value) && isValidEmail(mail.value) && isValidQty(quantity.value))) {
     return true;
   }
@@ -186,6 +186,14 @@ const checkedLocation = () => {
   alert("Veuillez sélectionner une localité");
   return false;
 };
+
+  // function for remove error if close or submiting form
+  isRemoveError = () => {
+    for (let i = 0; i < formData.length; i++) {
+      if (formData[i].dataset.errorVisible = "true") {
+        formData[i].dataset.errorVisible = "false" 
+    }};
+  }
 
 // send submit if form is checked and has values
 function validate() {
