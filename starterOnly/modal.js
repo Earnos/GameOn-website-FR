@@ -123,9 +123,10 @@ form.addEventListener(
 // creation of confirmation submit's windows
 const afterSubmitWindows = () => {
   form.style.display = "none";
-  formBody.style.height = "750px";
+  //formBody.style.height = "750px";
   // create p html tag for submit confirmation window
   p = document.createElement("p");
+  p.classList.add("confirmText");
   p.innerHTML = "Merci pour votre inscription";
   formBody.append(p);
   // creation button after submit window
@@ -136,8 +137,12 @@ const afterSubmitWindows = () => {
   formBody.append(confirmCloseBtn);
   // close event after submit window
   const closeAfterSubmit = document.querySelector(".confirmSubmitClose");
+  const textAfterSubmit = document.querySelector(".confirmText");
   closeAfterSubmit.addEventListener("click", e => {
     modalbg.style.display = "none";
+    // supression DOM elements of confirmation submit's windows for non disturbing the next "inscription" launch modal
+    textAfterSubmit.remove();
+    confirmCloseBtn.remove();
     // re-display the form for the next time
     form.style.display = "block";
   });
