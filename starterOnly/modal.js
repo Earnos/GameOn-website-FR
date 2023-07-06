@@ -152,14 +152,16 @@ const afterSubmitWindows = () => {
 const checkValues = () => {
   //const formDataInput = document.querySelectorAll(".formData > input");
   const formDataInput = document.querySelectorAll(".text-control");
+  //!isValidAddress && !isValidEmail && !isValidQty
 
   for (let i = 0; i < formDataInput.length; i++) {
-    if (!formDataInput[i].value) {
+    if ((!formDataInput[i].value)) {
       alert("Veuillez remplir tous les champs");
       return false;
-    }
+    }  
+  } if ((isValidText(firstName.value) && isValidText(lastName.value) && isValidEmail(mail.value) && isValidQty(quantity.value))) {
+    return true;
   }
-  return true;
 };
 
 //  valid  if checkbox is checked
